@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QIANO RGB</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            color: white;
+            animation: rgb 5s infinite alternate;
+        }
+
+        @keyframes rgb {
+            0% { background: #1a0033; }
+            25% { background: #2a0055; }
+            50% { background: #000; }
+            75% { background: #3a0077; }
+            100% { background: #1a0033; }
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 22px;
+            border: none;
+            border-radius: 12px;
+            background: #7c3aed;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 20px #a855f7;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px #ff00ff;
+        }
+
+        #text {
+            margin-top: 40px;
+            font-size: 45px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .show {
+            opacity: 1;
+            text-shadow: 0 0 25px #ff00ff;
+        }
+
+        .glitch {
+            animation: glitch 0.15s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 3px 0 red, -3px 0 blue; }
+            50% { text-shadow: -3px 0 red, 3px 0 blue; }
+            100% { text-shadow: 3px 0 red, -3px 0 blue; }
+        }
+
+        .flash {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .flash.active {
+            animation: flashAnim 0.3s;
+        }
+
+        @keyframes flashAnim {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="flash" id="flash"></div>
+
+<!-- 🔊 SOUND -->
+<audio id="sound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+
+<div class="container">
+    <button onclick="gas()">CLICK ME 😈</button>
+    <div id="text">QIANONIHBOS</div>
+</div>
+
+<script>
+function gas() {
+    const text = document.getElementById("text");
+    const flash = document.getElementById("flash");
+    const sound = document.getElementById("sound");
+
+    text.classList.remove("show", "glitch");
+
+    // 🔊 SOUND
+    sound.currentTime = 0;
+    sound.play().catch(()=>{});
+
+    // 📳 GETAR
+    if (navigator.vibrate) {
+        navigator.vibrate(150);
+    }
+
+    // 💥 FLASH
+    flash.classList.add("active");
+    setTimeout(() => flash.classList.remove("active"), 300);
+
+    // ⚡ TEKS
+    setTimeout(() => {
+        text.classList.add("show", "glitch");
+    }, 150);
+}
+</script>
+
+</body>
+</html>
